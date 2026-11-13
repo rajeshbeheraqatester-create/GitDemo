@@ -1,0 +1,34 @@
+{
+  "browsers": [],
+  "drivers": [
+    {
+      "major_browser_version": "156",
+      "driver_name": "chromedriver",
+      "driver_version": "156.0.8078.73",
+      "driver_ttl": 1793209917
+    }
+  ],
+  "stats": [
+    {
+      "browser": "chrome",
+      "browser_version": "",
+      "os": "windows",
+      "arch": "x86_64",
+      "lang": "java",
+      "selenium_version": "4.45",
+      "stats_ttl": 1793209916
+    }
+  ],
+  "cached_assets": [
+    {
+      "asset_name": "chromedriver",
+      "asset_version": "153.0.8010.52",
+      "last_used": 1791739063
+    },
+    {
+      "asset_name": "chromedriver",
+      "asset_version": "156.0.8078.73",
+      "last_used": 1793209786
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sun Jul 21 13:46:10 IST 2024
+opentelemetry-sdk-common-1.40.0.jar>central=
+opentelemetry-sdk-common-1.40.0-sources.jar>central=
+opentelemetry-sdk-common-1.40.0.pom>central=

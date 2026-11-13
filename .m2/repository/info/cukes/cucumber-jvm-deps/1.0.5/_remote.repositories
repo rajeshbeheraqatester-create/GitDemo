@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Sep 29 15:30:08 IST 2026
+cucumber-jvm-deps-1.0.5.jar>central=
+cucumber-jvm-deps-1.0.5-sources.jar>central=
+cucumber-jvm-deps-1.0.5.pom>central=

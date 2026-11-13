@@ -1,0 +1,249 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-parent</artifactId>
+        <version>5.7.0</version>
+        <relativePath/>
+    </parent>
+    <artifactId>cucumber-jvm</artifactId>
+    <version>8.0.2</version>
+    <packaging>pom</packaging>
+    <name>Cucumber-JVM</name>
+    <description>Cucumber for the JVM</description>
+    <url>https://cucumber.io/</url>
+
+    <properties>
+        <project.build.outputTimestamp>1790349045</project.build.outputTimestamp>
+    </properties>
+    <scm>
+        <connection>scm:git:git://github.com/cucumber/cucumber-jvm.git</connection>
+        <developerConnection>scm:git:git@github.com:cucumber/cucumber-jvm.git</developerConnection>
+        <url>git://github.com/cucumber/cucumber-jvm.git</url>
+        <tag>v8.0.2</tag>
+    </scm>
+
+    <modules>
+        <module>cucumber-archetype</module>
+        <module>cucumber-bom</module>
+        <module>cucumber-core</module>
+        <module>cucumber-gherkin</module>
+        <module>cucumber-gherkin-messages</module>
+        <module>cucumber-guice</module>
+        <module>cucumber-jakarta-cdi</module>
+        <module>cucumber-jakarta-openejb</module>
+        <module>cucumber-java8</module>
+        <module>cucumber-java</module>
+        <module>cucumber-junit</module>
+        <module>cucumber-junit-platform-engine</module>
+        <module>cucumber-picocontainer</module>
+        <module>cucumber-plugin</module>
+        <module>cucumber-spring</module>
+        <module>cucumber-testng</module>
+        <module>datatable</module>
+        <module>datatable-matchers</module>
+        <module>docstring</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>build-local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>compatibility</module>
+                <module>cucumber-kotlin-java8</module>
+            </modules>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!-- Apply code format by default -->
+                        <plugin>
+                            <groupId>com.diffplug.spotless</groupId>
+                            <artifactId>spotless-maven-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>spotless-apply</id>
+                                    <phase>compile</phase>
+                                    <goals>
+                                        <goal>apply</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- Modules are not included by default when building in CI.
+                 Releases are also made from CI, and we do not want to release
+                 these modules. -->
+            <id>include-extra-modules</id>
+            <modules>
+                <module>compatibility</module>
+                <module>cucumber-kotlin-java8</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>build-in-ci</id>
+            <activation>
+                <property>
+                    <name>env.CI</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!-- Check code format -->
+                        <plugin>
+                            <groupId>com.diffplug.spotless</groupId>
+                            <artifactId>spotless-maven-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>spotless-check</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>check</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-semantic-version</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>check</id>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <!-- Check style -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            </manifest>
+                            <manifestEntries>
+                                <Automatic-Module-Name>${project.Automatic-Module-Name}</Automatic-Module-Name>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <!-- Semantic version check  -->
+                <plugin>
+                    <groupId>org.revapi</groupId>
+                    <artifactId>revapi-maven-plugin</artifactId>
+                    <version>0.15.1</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.revapi</groupId>
+                            <artifactId>revapi-java</artifactId>
+                            <version>0.28.4</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <analysisConfiguration>
+                            <revapi.versions>
+                                <enabled>true</enabled>
+                            </revapi.versions>
+                            <revapi.differences id="intentional-api-changes">
+                                <ignore>true</ignore>
+                            </revapi.differences>
+                            <revapi.differences id="internal-api-issues">
+                                <ignore>true</ignore>
+                            </revapi.differences>
+                            <revapi.differences id="testng-api-issues">
+                                <ignore>true</ignore>
+                            </revapi.differences>
+                            <revapi.differences id="guice-api-issues">
+                                <ignore>true</ignore>
+                            </revapi.differences>
+                            <revapi.differences id="junit-jupiter-api-issues">
+                                <ignore>true</ignore>
+                            </revapi.differences>
+                            <revapi.differences id="jackson-api-issues">
+                                <ignore>true</ignore>
+                            </revapi.differences>
+                        </analysisConfiguration>
+                        <analysisConfigurationFiles>
+                            <configurationFile>
+                                <path>${project.rootdir}/.revapi/api-changes.json</path>
+                                <roots>
+                                    <root>8.0.0</root>
+                                    <root>internal</root>
+                                    <root>testng</root>
+                                    <root>guice</root>
+                                    <root>junit-jupiter</root>
+                                    <root>jackson</root>
+                                </roots>
+                            </configurationFile>
+                        </analysisConfigurationFiles>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <configuration>
+                        <java>
+                            <eclipse>
+                                <file>${project.rootdir}/.spotless/eclipse-formatter-settings.xml</file>
+                            </eclipse>
+                            <importOrder>
+                                <file>${project.rootdir}/.spotless/intellij-idea.importorder</file>
+                            </importOrder>
+                        </java>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

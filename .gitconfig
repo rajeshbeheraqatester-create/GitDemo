@@ -1,0 +1,5 @@
+[user]
+	name = rajesh
+	email = rajeshbehera.qatester@gmail.com
+[credential "https://github.com"]
+	useHttpPath = true

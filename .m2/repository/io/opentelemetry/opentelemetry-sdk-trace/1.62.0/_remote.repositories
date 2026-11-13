@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sun May 24 15:39:32 IST 2026
+opentelemetry-sdk-trace-1.62.0.jar>central=
+opentelemetry-sdk-trace-1.62.0-sources.jar>central=
+opentelemetry-sdk-trace-1.62.0.pom>central=

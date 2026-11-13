@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: 17.0.8.1 (Eclipse Adoptium)
+
+Name: feature.xml
+SHA-256-Digest: EArL2NI5m0E3vijf+eO4Na88Z4r86A/yLKUDN6SUST4=
+
