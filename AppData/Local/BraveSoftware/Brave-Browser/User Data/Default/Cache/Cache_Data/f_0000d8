@@ -1,0 +1,813 @@
+// JavaScript Document
+var MApplication_2_2 = (new function(){
+	this.version = '2.2.8',
+	this.lastUpdate = '2015-05-18',
+
+	/********************* Language *********************/
+	this.language = (new function(){
+		// en-US
+		this.lang = navigator.browserLanguage ? navigator.browserLanguage : navigator.language;
+		// Array('en', 'us') | Array('en')
+		this.langArr = this.lang.toLowerCase().split('-');
+		/**
+		 * Back URL based on the language of the client browser
+		 * @param array valueArr;
+		 * @return string;
+		 **/
+		this.reValue = function(valueArr){
+			var reValue = valueArr[this.langArr[0]];
+			reValue = reValue == undefined ? valueArr['default'] : reValue;
+			return reValue;
+		};
+		/**
+		 * According to the client browser language automatically jump
+		 * @param array valueArr;
+		 * @return null;
+		 **/
+		this.countdownJump = function(valueArr, interval){
+			var url = this.reValue(valueArr);
+			if (url != undefined && url != ''){
+				setTimeout(function(){window.location=url}, interval*1000);
+			}
+		};
+	});
+
+
+	/********************* Client *********************/
+	this.client = (new function(){
+		this.userAgent = navigator.userAgent.toLowerCase();
+		/**
+		 * Get client device
+		 * @return string;
+		 **/
+		this.getDevice = function(){
+			var device = 'other';
+			if (this.userAgent.indexOf("windows") != -1){
+				device = 'pc';
+			} else if(this.userAgent.indexOf("ipad") != -1) {
+				device = 'ipad';
+			} else if(this.userAgent.indexOf("macintosh") != -1) {
+				device = 'mac';
+			} else if(this.userAgent.indexOf("ipod touch") != -1) {
+				device = 'ipod touch';
+			} else if(this.userAgent.indexOf("iphone") != -1) {
+				device = 'iphone';
+			} else if(this.userAgent.indexOf("mobile") != -1) {
+				device = 'mobile';
+			}
+			return device;
+		};
+		/**
+		 * Get client system bit
+		 * @return string;
+		 **/
+		this.getSystemBit = function(){
+			var bit = '32';
+			if (this.userAgent.indexOf("wow64") != -1 || this.userAgent.indexOf("x86_64") != -1){
+				bit = '64';
+			}
+			return bit;
+		};
+		/**
+		 * Get client system type
+		 * @return string;
+		 **/
+		this.getSystemType = function(){
+			var systemType = 'other';
+			if (this.userAgent.indexOf("windows") != -1){
+				systemType = 'windows';
+			} else if(this.userAgent.indexOf("mac os") != -1) {
+				if (this.userAgent.indexOf("macintosh") != -1){
+					systemType = 'macos';
+				} else {
+					systemType = 'ios';
+				}
+			} else if(this.userAgent.indexOf("android") != -1) {
+				systemType = 'android';
+			}
+			return systemType;
+		};
+		/**
+		 * Get client system
+		 * @return string;
+		 **/
+		this.getSystem = function(){
+			var system = 'other';
+			if (this.userAgent.indexOf("windows nt 6.2") != -1){
+				system = 'win8';
+			} else if(this.userAgent.indexOf("windows nt 6.1") != -1) {
+				system = 'win7';
+			} else if(this.userAgent.indexOf("windows nt 5.1") != -1) {
+				system = 'winxp';
+			} else if(this.userAgent.indexOf("mac os") != -1) {
+				//system = 'macos';
+				if (this.userAgent.indexOf("macintosh") != -1){
+					system = 'macos';
+				} else {
+					system = 'ios';
+				}
+			} else if(this.userAgent.indexOf("android") != -1) {
+				system = 'android';
+			}
+			return system;
+		};
+		/**
+		 * Get client browser
+		 * @return string;
+		 **/
+		this.getBrowser = function(){
+			var browser = 'other',
+			ieTest = /(msie.|trident.*rv:)/,
+			edgeTest = /(edge)/,
+			chromeTest = /(chrome)/,
+			firefoxTest = /(firefox)/,
+			safariTest = /(safari)/,
+			operaTest = /(opr|opera)/;
+
+			if (ieTest.test(this.userAgent)){
+				browser = 'ie';
+			} else if(edgeTest.test(this.userAgent)){
+				browser = 'edge';
+			}  else if(operaTest.test(this.userAgent)){
+				browser = 'opera';
+			} else if(chromeTest.test(this.userAgent)){
+				browser = 'chrome';
+			} else if(firefoxTest.test(this.userAgent)){
+				browser = 'firefox';
+			} else if(safariTest.test(this.userAgent)){
+				browser = 'safari';
+			}
+			return browser;
+		};
+		/**
+		 * Get client browser version;
+		 * @return string;
+		 **/
+		this.getBrowserVer = function(){
+			var browser = this.getBrowser(), browserVerArr, browserVer;
+			if (browser == 'ie'){
+				if (this.userAgent.indexOf('msie') != '-1'){
+					var browserVerArr = this.userAgent.match(/(msie)+.(\d+)/g);
+					browserVer = browserVerArr[0].replace('msie ', '').toString();
+				} else if(this.userAgent.indexOf('rv:') != '-1') {
+					var browserVerArr = this.userAgent.match(/([rv:])+(\d+)/g);
+					browserVer = browserVerArr[0].replace('rv:', '').toString();
+				}
+			} else if(browser == 'chrome') {
+				var browserVerArr = this.userAgent.match(/(chrome)+.(\d+)/g);
+				browserVer = browserVerArr[0].replace('chrome\/', '').toString();
+			} else if(browser == 'firefox') {
+				var browserVerArr = this.userAgent.match(/(firefox)+.(\d+)/g);
+				browserVer = browserVerArr[0].replace('firefox\/', '').toString();
+			} /*else if(browser == 'opera') {
+				var browserVerArr = this.userAgent.match(/(version)+.(\d+)/g);
+				browserVer = browserVerArr[0].replace('version\/', '').toString();
+			} */else if(browser == 'safari') {
+				var browserVerArr = this.userAgent.match(/(version)+.(\d+)/g);
+				browserVer = browserVerArr[0].replace('version\/', '').toString();
+			} else {
+				browserVer = 'unknown';
+			}
+			return Array(browser, browserVer);
+		};
+		/**
+		 * Get http header
+		 * @return string;
+		 **/
+		this.getHead = function(){
+			var req = new XMLHttpRequest();
+			req.open('GET', document.location, false);
+			req.send(null);
+			var head = req.getAllResponseHeaders().toLowerCase();
+			return head;
+		};
+	});
+
+
+	/********************* URL *********************/
+	this.url = (new function(){
+		/**
+		 * Get Current URL
+		 * @return string;
+		 **/
+		this.getUrl = function(){
+			return window.location.href;
+		};
+		/**
+		 * Get Referrer URL
+		 **/
+		this.getReferrer = function(){
+			return document.referrer;
+		};
+		/**
+		 * Get Domain
+		 * @param string url;
+		 * @return string; 'http://www.xxx.com/xxx/xxx.html?a=1#b' //return 'www.xxx.com'
+		 **/
+		this.getDomain = function(url){
+			var domain;
+			if (!url){
+				domain = window.document.location.host;
+			} else {
+				domain = url.match(/([\w-]+)(:\/\/)([\w.-]+)/i);
+				if (domain != null) domain = domain[3];
+			}
+			if(domain != null) return domain.toString();
+			return null;
+		};
+		/**
+		 * Get File Path
+		 * @param string url;
+		 * @return string; 'http://www.xxx.com/xxx/xxx.html?a=1#b' //return '/xxx/xxx.html'
+		 **/
+		this.getFilePath = function(url){
+			var filePath;
+			if (!url){
+				filePath = window.document.location.pathname;
+				filePath = filePath.replace(/\/{2,}/g, '/');
+			} else {
+				filePath = url.replace(this.getDomain(url), '');
+				filePath = filePath.replace(/^\w+:\/\//i ,'');
+				filePath = filePath.replace(/(\?+)([^\?+])*$/, '');
+				filePath = filePath.replace(/(\#+)([^\#+])*$/, '');
+			}
+			return filePath.toString();
+		};
+		/**
+		 * Get Dir Path
+		 * @param string url;
+		 * @return string; 'http://www.xxx.com/xxx/xxx.html?a=1#b' //return '/xxx/'
+		 **/
+		this.getDirPath = function(url){
+			var filePath, dirPath, fileName;
+			filePath = this.getFilePath(url);
+			if (!url){
+				dirPath = filePath.substring(0, filePath.lastIndexOf('/'))+'/';
+			} else {
+				fileName = filePath.match(/[\w.-]*$/i);
+				dirPath = filePath.replace(this.getDomain(url), '');
+				dirPath = dirPath.replace(fileName, '');
+			}
+			return dirPath.toString();
+		};
+		/**
+		 * Get URL File Name
+		 * @param string url;
+		 * @return string; 'http://www.xxx.com/xxx/xxx.html?a=1#b' //return 'xxx.html'
+		 **/
+		this.getFileName = function(url){
+			var filePath, fileName;
+			if (!url) url = this.getUrl();
+			filePath = this.getFilePath(url);
+			fileName = filePath.match(/[\w.-]*$/i);
+			return fileName.toString();
+		};
+		/**
+		 * Get URL Query string
+		 * @param string url;
+		 * @return string; 'http://www.xxx.com/xxx/xxx.html?a=1#b' //return 'a=1#b'
+		 **/
+		this.getQuery = function(url){
+			var query = '';
+			if (!url){
+				query = this.getQuery(this.getUrl());
+				if (query == null) return '';
+			} else {
+				query = url.match(/[?].*$/i);
+				if (query != null) query = query[0].substring(1).toString().replace(/#.*/, '');
+			}
+			return query;
+		};
+		/**
+		 * this.getFragment alias
+		 **/
+		this.getHashTag = function(url){
+			return this.getFragment(url);
+		};
+		/**
+		 * Get URL Fragment
+		 * @param string url;
+		 * @return string; 'http://www.xxx.com/xxx/xxx.html?a=1#b' // return 'b'
+		 **/
+		this.getFragment = function(url){
+			var fragment;
+			if (!url) url = this.getUrl();
+			fragment = url.match(/#.*/);
+			if (fragment != null) fragment = fragment[0].substring(1);
+			return fragment;
+		};
+		/**
+		 * Get URL Parameters
+		 * @param string key,GET parameters;
+		 * @return string | array;
+		 **/
+		this.getParameters = function(key){
+			var queryString = this.getQuery(),
+				returnValue = '',
+				returnValueArr = Array();
+			if (queryString != null){
+				if (queryString.length > 1){
+					var queryList = queryString.split('&');
+					for(var i=0; i<queryList.length; i++){
+						var singleQueryArr = queryList[i].split('=');
+						var singleQueryKey = singleQueryArr[0];
+						var singleQueryValue = singleQueryArr[1] ? singleQueryArr[1].replace(/#.*/, '') : '';
+						if (singleQueryKey == key && singleQueryArr.length == 2){
+							returnValue = singleQueryValue;
+						}
+						returnValueArr[singleQueryKey] = singleQueryValue;
+					}
+				}
+				if (key) return returnValue;
+			}
+			return returnValueArr;
+		};
+		/**
+		 * Parse URL
+		 * @param string url;
+		 * @return array;
+		 **/
+		this.parseUrl = function(url){
+			var domain, filePath, dirPath, fileName, query;
+			if (!url) url = this.getUrl();
+			domain = this.getDomain(url);
+			filePath = this.getFilePath(url);
+			dirPath = this.getDirPath(url);
+			fileName = this.getFileName(url);
+			query = this.getQuery(url);
+			hashTag = this.getHashTag(url);
+			return Array(domain, filePath, dirPath, fileName, query, hashTag);
+		};
+		/**
+		 * Parse Query
+		 * @param string url;
+		 * @return array;
+		 **/
+		this.parseQuery = function(url){
+			var query, hashTag;
+			if (!url) url = this.getUrl();
+			query = this.getQuery(url);
+			hashTag = this.getHashTag(url);
+			return Array(query, hashTag);
+		};
+	});
+
+
+	/********************* Check *********************/
+	this.check = (new function(){
+		/**
+		 * Check the email format is correct
+		 * @param string email;
+		 * @return boolean;
+		 **/
+		this.isEmail = function(email){
+			if (this.isNull(email)) return false;
+			var start = email.indexOf('@');
+			if (start == '-1') return false;
+			domain = email.substr(start+1);
+			if (!this.isDomain(domain)) return false;
+			name = email.substr(0, start);
+			var nameTest = /^([\w])+([\w-.]?)+$/i;
+			if (!nameTest.test(name)) return false;
+			return true;
+		};
+		/**
+		 * Check the domain format is correct
+		 * @param string domain;
+		 * @return boolean;
+		 **/
+		this.isDomain = function(domain){
+			var domainTest = /^(([\w]+-?)*[\w]+.)+([a-z]{2,})+$/i;
+			return domainTest.test(domain);
+		};
+		/**
+		 * Check the URL format is correct
+		 * @param string url;
+		 * @return boolean;
+		 **/
+		this.isHttpUrl = function(url){
+			var urlTest = /^http[s]?:\/\/([\w-]+.)+[\w-]+([\w-./?%&=]*)?$/i;
+			if (!urlTest.test(url)) return false;
+			return true;
+		};
+		/**
+		 * Check whether a variable is empty
+		 * @param val,arbitrary string;
+		 * @return boolean;
+		 **/
+		this.isNull = function(val){
+			if (val != null && val != 0) val = val.replace(/[ ]/g, '');
+			if (val == '' || val == 'undefined' || val == null) return true;
+			return false;
+		};
+		/**
+		 * Check the license code format is correct
+		 * @param string code,product license code;
+		 * @param number len,code length;
+		 * @return boolean;
+		 **/
+		this.isCode = function(code, len){
+			if (len == 19){
+				var codeTest = /[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}/i;
+				if (!codeTest.test(code.toLowerCase())) return false;
+			} else if(len == 23) {
+				var codeTest = /[0-9a-f]{5}-[0-9a-f]{5}-[0-9a-f]{5}-[0-9a-f]{3}[0-9a-z]{2}/i;
+				if (!codeTest.test(code.toLowerCase())) return false;
+			} else {
+				if (!this.isCode(code, 19)){
+					if (!this.isCode(code, 23)) return false;
+				}
+			}
+			return true;
+		}
+	});
+
+
+	/********************* Cookie *********************/
+	this.cookie = (new function(){
+		this.cookieEnabled = navigator.cookieEnabled;
+		this.expireTime = 12*30*24*60*60*1000;
+		/**
+		 * Set cookie
+		 * @param string cName,cookie name;
+		 * @param string cValue,cookie value;
+		 * @param int cHours,save time;
+		 * @return boolean;
+		 **/
+		this.set = function(cName, cValue){
+			var str = cName+"="+escape(cValue);
+			var date = new Date();
+			date.setTime(date.getTime()+this.expireTime);
+			document.cookie = str+"; expires="+date.toGMTString()+"; path=/";
+			return true;
+		};
+		/**
+		 * Get cookie value
+		 * @param string cName,cookie name;
+		 * @return string;
+		 **/
+		this.get = function(cName){
+			var cookieArr = document.cookie.split("; ");
+			for(var i=0;i<cookieArr.length;i++){
+				var temp = cookieArr[i].split("=");
+				if(temp[0] == cName) return unescape(temp[1]);
+			}
+		};
+		/**
+		 * Get all cookies
+		 * @return array;
+		 **/
+		this.getAll = function(){
+			var cookieArr = document.cookie.split("; ");
+			var reCookieArr = Array;
+			for(var i=0;i<cookieArr.length;i++){
+				var temp = cookieArr[i].split("=");
+				reCookieArr[temp[0]] = unescape(temp[1]);
+			}
+			return reCookieArr;
+		};
+		/**
+		 * Remove cookie
+		 * @param string cName,cookie name;
+		 * @return boolean;
+		 **/
+		this.remove = function(cName){
+			var date = new Date();
+			date.setTime(date.getTime()-10000);
+			document.cookie = cName+"=0; expires="+date.toGMTString();
+			return true;
+		};
+	});
+
+
+	/********************* Datetime *********************/
+	this.datetime = (new function(){
+		/**
+		 * Get datetime or timestamp
+		 * @param string type,'datetime','datetimes','date','time';
+		 * @param number timestamp, If the existence of this parameter. then returns the timestamp datetime;
+		 * @return string;
+		 **/
+		this.get = function(type, timestamp){
+			if (timestamp){
+				var dateObj = new Date(parseInt(timestamp)*1000);
+			} else {
+				var dateObj = new Date();
+			}
+			var month = Array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec');
+			var y = dateObj.getFullYear();
+			var m = dateObj.getMonth()+1;
+			m = m < 10 ? '0'+m : m;
+			var d = dateObj.getDate();
+			d = d < 10 ? '0'+d : d;
+			var h = dateObj.getHours();
+			h = h < 10 ? '0'+h : h;
+			var i = dateObj.getMinutes();
+			i = i < 10 ? '0'+i : i;
+			var s = dateObj.getSeconds();
+			s = s < 10 ? '0'+s : s;
+			var mi = dateObj.getMilliseconds();
+			mi = mi < 100 ? mi < 10 ? '00'+mi : '0'+mi  :  mi;
+			if (type == 'datetime') {
+				datetime = y+'-'+m+'-'+d+' '+h+':'+i+':'+s;
+			} else if(type == 'datetimes') {
+				datetime = y+'-'+m+'-'+d+' '+h+':'+i+':'+s+' '+mi;
+			} else if(type == 'date') {
+				datetime = y+'-'+m+'-'+d;
+			} else if(type == 'dates') {
+				datetime = month[Number((m-1))]+'. '+d+', '+y;
+			} else if(type == 'time') {
+				datetime = h+':'+i+':'+s;
+			}
+			return datetime;
+		};
+		/**
+		 * Get the interval each time zone
+		 * @return number; hour
+		 **/
+		this.getTimeZone = function(){
+			var dateObj = new Date();
+			return dateObj.getTimezoneOffset()/60;
+		};
+		/**
+		 * Transform current date to UTC
+		 * @param string type,timestamp or datetime;
+		 * @param string datetime,2020-10-10 12:30:15;
+		 * @return mixed;
+		 **/
+		this.transformCurrentDatetimeToUtc = function(type, datetime){
+			var timestamp = this.getTimestamp(datetime)+(this.getTimeZone()*60*60);
+			if (type == 'timestamp'){
+				return timestamp;
+			} else {
+				var dateObj = new Date(parseInt(timestamp) * 1000);
+				var y = dateObj.getFullYear();
+				var m = dateObj.getMonth()+1;
+				m = m < 10 ? '0'+m : m;
+				var d = dateObj.getDate();
+				d = d < 10 ? '0'+d : d;
+				var h = dateObj.getHours();
+				h = h < 10 ? '0'+h : h;
+				var i = dateObj.getMinutes();
+				i = i < 10 ? '0'+i : i;
+				var s = dateObj.getSeconds();
+				s = s < 10 ? '0'+s : s;
+				return y+'-'+m+'-'+d+' '+h+':'+i+':'+s;
+			}
+		};
+		/**
+		 * Conversion Datetime to Timestamp
+		 * @param string datetime;
+		 * @return number;
+		 **/
+		this.getTimestamp = function(datetime){
+			var dateObj = new Date();
+			if (datetime){
+				dateObj.setFullYear(datetime.substring(0, 4));
+				dateObj.setMonth(datetime.substring(5, 7)-1);
+				dateObj.setDate(datetime.substring(8, 10));
+				dateObj.setHours(datetime.substring(11, 13));
+				dateObj.setMinutes(datetime.substring(14, 16));
+				dateObj.setSeconds(datetime.substring(17, 19));
+				return Date.parse(dateObj)/1000;
+			} else {
+				return Math.floor(dateObj.getTime()/1000);
+			}
+		};
+		/**
+		 * Get countdown datetime
+		 * @param int expireDatetime, expire datetime;
+		 * @return array;
+		 **/
+		this.getCountdown = function(expireDatetime){
+			var currentDateObj = new Date();
+			var currentTime = this.getTimestamp();
+			var expireTime = this.getTimestamp(expireDatetime);
+
+			var overTime = expireTime-currentTime;
+			if (overTime > 0){
+				var d = Math.floor(overTime/(24*60*60));
+				var h = Math.floor(overTime/(60*60)%24);
+				var i = Math.floor(overTime/60%60);
+				var s = Math.floor(overTime%60);
+				var mi = 999-currentDateObj.getMilliseconds();
+				if (mi < 10){
+					 mi = '00'+mi;
+				} else if(mi < 100) {
+					mi = '0'+mi;
+				}
+				return Array(d, h, i, s, mi);
+			} else {
+				return Array('0', '0', '0', '0', '000');
+			}
+		};
+		/**
+		 * Get cycle countdown datetime
+		 * @param int startTimestamp, begin timestamp;
+		 * @param int intervalDay,interval day;
+		 * @return array;
+		 **/
+		this.getCycleCountdown = function(startTimestamp, intervalDay){
+			var intervalTimestamp = intervalDay*24*60*60;
+			var dateObj = new Date();
+			var time = dateObj.getTime().toString().substring(0, 10);
+			for(i=1;;i++){
+				var remainingTime = (startTimestamp+intervalTimestamp*i)-time;
+				if (remainingTime > 0) break;
+			}
+			var d = Math.floor(remainingTime/(24*60*60));
+			var h = Math.floor(remainingTime/(60*60)%24);
+			var i = Math.floor(remainingTime/60%60);
+			var s = Math.floor(remainingTime%60);
+			var mi = 999-dateObj.getMilliseconds();
+			if (mi < 10){
+				 mi = '00'+mi;
+			} else if(mi < 100) {
+				mi = '0'+mi;
+			}
+			return Array(d, h, i, s, mi);
+		};
+	});
+
+
+	/********************* Packages *********************/
+	this.packages = (new function(){
+		/**
+		 * Replace the string of o to 0
+		 **/
+		this.replaceoto0 = function(str){
+			return str.replace(/o|O/g, '0');
+		};
+		/**
+		 * Countdown to jump
+		 * @param string url; e.g.'http://www.xxx.com'
+		 * @param number time; 1000 = 1s
+		 * @return null;
+		 **/
+		this.countdownToJump = function(url, time){
+			setTimeout(function(){window.location.href=url}, time);
+			return;
+		};
+		/**
+		 * Get file Extension
+		 * @param string name,file name;
+		 * @return string;
+		 **/
+		this.getFileExt = function(name){
+			extArr = name.split('.');
+			ext = extArr[extArr.length-1];
+			ext = ext.toLocaleLowerCase();
+			return ext;
+		};
+		/**
+		 * Open a window and current page jump
+		 * @param string openUrl;
+		 * @param string jumpUrl;
+		 * @return null;
+		 **/
+		this.openWindowAndGoto = function(openUrl, jumpUrl){
+			window.open(openUrl, 'openWindow', '');
+			window.location.href = jumpUrl;
+			return;
+		};
+		/**
+		 * Remove spaces
+		 * @param string str;
+		 * @return string;
+		 **/
+		this.lTrim = function(str){
+			return str.replace(/(^\s*)/g, '');
+		};
+		this.rTrim = function(str){
+			return str.replace(/(\s*$)/g, '');
+		};
+		this.trim = function(str){
+			str = this.lTrim(str);
+			return this.rTrim(str);
+		};
+		/**
+		 * Complement integer zero
+		 * @param string num,The need to fill the number of zero;
+		 * @param int len,Complement bit length;
+		 * @return string;
+		 **/
+		this.zeroize = function(num, len){
+			var str = num.toString();
+			var strLen = str.length;
+			if (strLen < len){
+				for(var i=0; i<(len-strLen); i++){
+					str = '0'+str;
+				}
+			}
+			return str;
+		};
+		/**
+		 * Conversion size
+		 * @param number size,Byte;
+		 * @return string;
+		 **/
+		this.conversionSize = function(size){
+			var units = Array('B', 'KB', 'MB', 'GB', 'TB');
+			for (i=0; size>=1024 && i<4; i++){
+				size /= 1024;
+			}
+			size = Math.round(size*100);
+			size /= 100;
+			return size+' '+units[i];
+		};
+		/**
+		 * Get Random
+		 * @param int lowerValue,Beginning of the range;
+		 * @param int upperValue,End of the range;
+		 * @return int;
+		 **/
+		this.getRandom = function(lowerValue, upperValue){
+			var choices = upperValue-lowerValue+1;
+			return Math.floor(Math.random()*choices+lowerValue);
+		};
+		/**
+		 * Refresh Captcha
+		 * @param string id,Captcha images DOM id;
+		 * @param string captchaUrl,Captcha images URL;
+		 * @return null;
+		 **/
+		this.refreshCaptcha = function(id, captchaUrl){
+			var randoms = Math.random();
+			document.getElementById(id).src = captchaUrl+'&r='+randoms;
+		};
+		/**
+		 * Generated passwords
+		 * @param number grade, 1|2|3;
+		 * @param number length;
+		 * @return mixed;
+		 **/
+		this.genPassword = function(grade, length){
+			grade = grade > 0 ? grade : 3;
+			length = length > 0 ? length : 12;
+			var letter = 'aAbBcCdDeEfFgGhHjJkKmMnNpPqQrRsStTuUvVwWxXyYzZ';
+			var number = '123456789';
+			var symbol = '-_*#?$@[]()~,.;|+=%';
+			var password = '';
+
+			for(var i=0; i<=length; i++){
+				if (i == 0){
+					if (grade > 1){
+						characterSet = letter;
+					} else {
+						characterSet = number;
+					}
+				} else {
+					if (grade == 3){
+						characterSet = letter+number+symbol;
+					} else if(grade == 2) {
+						characterSet = letter+number;
+					} else {
+						characterSet = '0'+number;
+					}
+				}
+				password += characterSet.substr((this.getRandom(1, characterSet.length)-1), 1);
+			}
+			return password;
+		};
+
+		/**
+		 * Check your password strength and intensity level digital return, the greater the number, the stronger the maximum intensity 5
+		 * @param string $password, Password;
+		 * @return int;
+		 **/
+		this.passwordStrength = function(password){
+			var strength = 0;
+			if (password.length >= 8) strength += 1;
+
+			var passwordTest = /[0-9]/;
+			if (passwordTest.test(password)) strength += 1;
+
+			var passwordTest = /[a-z]/;
+			if (passwordTest.test(password)) strength += 1;
+
+			var passwordTest = /[A-Z]/;
+			if (passwordTest.test(password)) strength += 1;
+
+			var passwordTest = /[^a-z0-9]/i;
+			if (passwordTest.test(password)) strength += 1;
+
+			return strength;
+		};
+
+		/**
+		 * Password expiration Tips
+		 **/
+		this.passwordExpirationTips = function(platform, key){
+
+		}
+	});
+});
+
+function MApp(ver){
+	ver = ver ? ver.toString().replace('.', '_') : '';
+	if (typeof window['MApplication_'+ver] == 'object'){
+		return window['MApplication_'+ver];
+	} else {
+		return MApplication_2_2;
+	}
+}

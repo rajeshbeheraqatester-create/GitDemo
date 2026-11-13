@@ -1,0 +1,170 @@
+2026-11-12::19:14:57::930	GetEligibleDriverDetailsSize                      :48  		Get eligible drivers Size started---------------------
+
+2026-11-12::19:14:58::070	ADDL::getURLVersionJSON                           :2123	DEBUG	No Server Ip found
+
+2026-11-12::19:14:58::070	ADDL::getURLVersionJSON                           :2134	DEBUG	No Servertype found
+
+2026-11-12::19:14:58::145	ADDL::isVersionCompatible                         :704 	DEBUG	Inside local version.json parser
+
+2026-11-12::19:14:58::146	ADDL::isVersionCompatible                         :819 	DEBUG	Downloading a file from server: . Download destination: C:\Users\rajes\AppData\Local//AMD_Common//addl_details.json
+
+2026-11-12::19:14:58::194	ADDL::isVersionCompatible                         :939 	DEBUG	 addl version : 1.000000  --- dll has 1.000000 
+
+2026-11-12::19:14:58::194	ADDL::validateInput                               :224 	DEBUG	 common library version  is compatible 
+
+2026-11-12::19:14:58::194	ADDL::fillBuildInfoDetails                        :129 	DEBUG	Entered fillBuildInfo function to get the system and build details
+
+2026-11-12::19:14:58::194	GetEligibleDriverDetailsSize                      :68  	DEBUG	BuildInfo details : is_consumer - 1, is_workstation - 0, is_win10 - 1, is_win7 - 0, is_legacy_eligible - 0,   isIcafe - 0, isFalcon - 0
+
+2026-11-12::19:14:58::195	GetEligibleDriverDetailsSize                      :219 		INSIDE CONSUMER
+
+2026-11-12::19:14:58::217	ADDL::ParseJSONfile                               :384 	DEBUG	file under checking C:\Users\rajes\AppData\Local//AMD_Common//DrvDldDetails_Consumer_WHQL_Win11.json
+
+2026-11-12::19:14:58::217	ADDL::checkDownloadAccelaratorEligibility         :2288	DEBUG	Download Acceleration is eligible since the physical disk is an SSD and the CPU core count is >= 4
+
+2026-11-12::19:14:58::221	ADDL::fillDriverInfoDetails                       :286 	DEBUG	No drivers found in the JSON file
+
+2026-11-12::19:14:58::221	GetEligibleDriverDetailsSize                      :315 	DEBUG	Get eligible drivers size function ended
+
+2026-11-12::19:14:58::221	GetEligibleDriverDetailsSize                      :322 	DEBUG	No AMD hardware found
+
+2026-11-12::19:14:58::334	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-12::19:14:58::334	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-12::19:14:58::536	ADDL::checkURLFormat                              :73  	DEBUG	No serverIp is found
+
+2026-11-12::19:14:58::537	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1560	DEBUG	hconnet - /drivers/installer/json/NewComponents.json
+
+2026-11-12::19:14:58::537	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1570	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 90000 milliseconds: Result = 1 0
+
+2026-11-12::19:14:58::537	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1574	DEBUG	Setting INTERNET_OPTION_SEND_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-12::19:14:58::537	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1576	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-12::19:14:58::870	IsSmartBlurAvailableIMPL                          :1989	DEBUG	Try using previous data
+
+2026-11-12::19:15:00::719	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1613	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-09 14:29:16.000 UTC
+
+2026-11-12::19:15:00::720	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1649	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-09 14:29:16.000 UTC
+
+2026-11-12::19:15:00::720	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1653	DEBUG	Cached file up to date
+
+2026-11-12::19:15:22::028	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-12::19:15:22::028	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-12::19:15:22::374	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-12::19:15:22::374	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-12::21:40:30::499	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-12::21:40:30::499	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-12::21:40:30::576	IsSmartBlurAvailableIMPL                          :1994	DEBUG	Successfully checked for new data
+
+2026-11-12::23:12:06::791	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-12::23:12:06::792	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-12::23:12:06::910	ADDL::checkURLFormat                              :73  	DEBUG	No serverIp is found
+
+2026-11-12::23:12:06::910	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1560	DEBUG	hconnet - /drivers/installer/json/NewComponents.json
+
+2026-11-12::23:12:06::910	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1570	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 90000 milliseconds: Result = 1 0
+
+2026-11-12::23:12:06::910	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1574	DEBUG	Setting INTERNET_OPTION_SEND_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-12::23:12:06::912	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1576	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-12::23:12:07::147	IsSmartBlurAvailableIMPL                          :1989	DEBUG	Try using previous data
+
+2026-11-12::23:12:08::104	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1613	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-12 16:59:46.000 UTC
+
+2026-11-12::23:12:08::106	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1649	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-09 14:29:16.000 UTC
+
+2026-11-12::23:12:08::116	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1711	DEBUG	Completed download. Total bytes downloaded: 43646
+
+2026-11-13::00:22:29::897	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::00:22:29::897	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::00:22:30::051	IsSmartBlurAvailableIMPL                          :1994	DEBUG	Successfully checked for new data
+
+2026-11-13::00:22:32::643	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::00:22:32::643	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::00:22:32::692	ADDL::checkURLFormat                              :73  	DEBUG	No serverIp is found
+
+2026-11-13::00:22:32::693	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1560	DEBUG	hconnet - /drivers/installer/json/NewComponents.json
+
+2026-11-13::00:22:32::693	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1570	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 90000 milliseconds: Result = 1 0
+
+2026-11-13::00:22:32::693	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1574	DEBUG	Setting INTERNET_OPTION_SEND_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-13::00:22:32::710	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1576	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-13::00:22:32::973	IsSmartBlurAvailableIMPL                          :1989	DEBUG	Try using previous data
+
+2026-11-13::00:22:33::624	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1613	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-12 16:59:46.000 UTC
+
+2026-11-13::00:22:33::624	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1649	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-12 16:59:46.000 UTC
+
+2026-11-13::00:22:33::624	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1653	DEBUG	Cached file up to date
+
+2026-11-13::00:22:56::344	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::00:22:56::344	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::00:35:50::261	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::00:35:50::261	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::00:36:36::609	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::00:36:36::609	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::00:36:38::585	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::00:36:38::585	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::01:20:15::869	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::01:20:15::869	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::12:08:58::503	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::12:08:58::503	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::12:08:58::626	IsSmartBlurAvailableIMPL                          :1994	DEBUG	Successfully checked for new data
+
+2026-11-13::12:09:00::569	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::12:09:00::569	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::12:09:00::649	ADDL::checkURLFormat                              :73  	DEBUG	No serverIp is found
+
+2026-11-13::12:09:00::706	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1560	DEBUG	hconnet - /drivers/installer/json/NewComponents.json
+
+2026-11-13::12:09:00::707	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1570	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 90000 milliseconds: Result = 1 0
+
+2026-11-13::12:09:00::707	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1574	DEBUG	Setting INTERNET_OPTION_SEND_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-13::12:09:00::707	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1576	DEBUG	Setting INTERNET_OPTION_RECEIVE_TIMEOUT to 30000 milliseconds: Result = 1 0
+
+2026-11-13::12:09:00::914	IsSmartBlurAvailableIMPL                          :1989	DEBUG	Try using previous data
+
+2026-11-13::12:09:03::440	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1613	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-12 16:59:46.000 UTC
+
+2026-11-13::12:09:03::440	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1649	DEBUG	Filesize of NewComponents.json is 43646. Modified 2026-11-12 16:59:46.000 UTC
+
+2026-11-13::12:09:03::440	ADDL::downloadFileFromInternetIfUpdateAvaliable   :1653	DEBUG	Cached file up to date
+
+2026-11-13::16:07:43::710	getSmartBlurDetailsJsonURL                        :35  	DEBUG	No Server Ip found
+
+2026-11-13::16:07:43::710	getSmartBlurDetailsJsonURL                        :43  	DEBUG	No Servertype found
+
+2026-11-13::16:07:43::847	IsSmartBlurAvailableIMPL                          :1994	DEBUG	Successfully checked for new data
+

@@ -1,0 +1,478 @@
+/*! iobit.com 2020-07-27
+* http://www.iobit.com
+* Copyright (c) 2020 IObit.com; */
+$(function() {
+	var wid = $(window).width();
+	if (wid < 760) {
+		$('.pc-reveal,.product-pop,.anniversary,.mid-year-store,.iu9,.db7newen,.ptiulocker,.iu10,.db8,.giveawaywarmup,.thanksgiving,.popout').remove();
+		$(".floatlayer,.bottom-support,.itop-pop").remove();
+		$(".header").removeClass("nav-christms");
+	}
+	else {
+		$(".mobile-reveal,.bottom .subscribe,.button-fixed,.subscribe-mail").remove();
+	}
+});
+$(function() {
+	// init navagation
+	var showgdpr = MApp(2.2).cookie.get('showgdpr');
+	
+	// nav
+	$(".header-nav li.hasSub .gnavi-list-wrap").click(function(event) {
+		var val = $(this).parent().data('nav-menu-toggle');
+		if ($(this).hasClass('active')) {
+			$(this).removeClass('active');
+			$(".main-nav[data-nav-menu='"+val+"']").removeClass('active');
+		}else{
+			$(".header-nav li.hasSub .gnavi-list-wrap").removeClass('active')
+			$(this).addClass('active');
+			$(".main-nav").removeClass('active');
+			$(".main-nav[data-nav-menu='"+val+"']").addClass('active')
+		}
+	});
+
+	// subnav
+
+
+	// searchbar
+	$(".search-bar .search-btn").click(function(event) {
+		if ($(".search-bar").hasClass('active')) {
+			var searchVal = $(".search-bar #q").val();
+			if (searchVal == "") {
+				$(".search-bar").addClass('on-error');
+			}else{
+				$('#cse-search-box').submit();
+			}
+			// do search
+		}else{
+			$(".search-bar #q").val('');
+			$(".search-bar").addClass('active');
+		}
+	});
+	// Subscribe 
+
+	$(".subscribe .send-btn").click(function(event) {
+		var mailVal = $(".email-bar #subscribeNewsletterEmails").val();
+		if (mailVal == "") {
+			$(".subscribe .email-bar").addClass('on-error');
+		}
+	});
+	// region-selector
+	$(".region-selector").click(function(event) {
+		if($(window).width()<768) {
+			$("html,body").css({                                
+	        "position":"fixed",                                
+	        "top":-scroll                            
+	    }); 
+		}
+		var lan = MApp(2.2).url.getDirPath().substring(1,3);
+    	if(lan=='sv'||lan=='dk')	return false;
+		$("#languagepop").removeClass('hide');
+	});
+	$("#languagepop .lang-list li").click(function(event) {
+		$("#languagepop").addClass('hide');
+		$(".btm-nav .region-zone .region-selector").attr('class', "region-selector "+$(this).attr('class'));
+		$(".btm-nav .region-zone .region-selector span").html($(this).find('span').html());
+		
+		if($(window).width()<768) {
+			$("html,body").css({                                    
+        "position":"static",                            
+     }); 
+		}      
+	});
+	$("#languagepop .btn-close").click(function(event) {
+		$("#languagepop").addClass('hide');
+		if($(window).width()<768) {
+			$("html,body").css({                                    
+        "position":"static",                            
+     }); 
+		}      
+	});
+
+	// support
+
+	// $(".select-content .simulation-select").click(function(event) {
+	//  $(this).next().addClass("active");
+	//  $(this).addClass("active");
+	// });
+	// $(".select-content ol li").click(function(event) {
+	//  var num =$(this).index();
+	//  $(this).parents(".select-content").find(".simulation-select").html($(this).text());
+	//  // $(".select-content .simulation-select").html($(this).text());
+	//  $(".select-product .list-content ul").eq(num).addClass("active").siblings().removeClass("active");
+	//  $(this).parent().removeClass("active");
+	//  $(".select-content .simulation-select").removeClass("active");
+	// });
+
+	$(".support-content .information-display dl dt").click(function(event) {
+		if ($(this).parent().hasClass('active')) {
+			$(this).parent().removeClass('active');
+		}else{
+			$(this).parent().addClass("active").siblings().removeClass("active");
+		}
+	});
+	
+	$("body").on("click",".select-content .simulation-select", function(event) {
+		// console.log("ww");
+		/* Act on the event */
+		if ($(this).hasClass("active")) {
+			$(this).removeClass("active").next().removeClass("active");
+		}else{
+			$(this).addClass("active").next().addClass("active");
+		}
+	});
+
+	// $(".select-content .simulation-select").click(function(event) {
+	//  if ($(this).hasClass("active")) {
+	//    console.log("w");
+	//    $(this).removeClass("active").next().removeClass("active");
+	//  }else{
+	//    console.log("e");
+	//    $(this).addClass("active").next().addClass("active");
+	//  }
+	// });
+
+	$(".select-content ol li").click(function(event) {
+		$(this).parents(".select-content").find(".simulation-select cite").html($(this).text());
+		$(this).parent().removeClass("active");
+		$(this).parent().prev().removeClass("active");
+		
+		if ($("body").find('.select-product').length != 0) {
+			$(".select-product .list-content ul").eq($(this).index()).addClass("active").siblings().removeClass("active");
+		}
+		
+	}); 
+
+
+	// $(".product-handle .button").click(function(event) {
+	//  if($(".captcha").val() == "") {
+	//    $(".captcha").parent().addClass("error");
+	//  }
+	// });
+
+	if(showgdpr==1) $('.float-bar').remove();
+		
+
+	// diagnosis-call
+	//DiagnosisCall.run();
+    // $(window).resize(function(){
+    //     DiagnosisCall.run();
+    // });
+
+	
+	$("#diagnosis-call .active-icon").hover(function(){
+		$('.call-bubble').removeClass('hide');
+	});
+	$('#diagnosis-call .call-bubble h2').click(function(){
+		$('.call-bubble').addClass('hide');
+	});
+
+	var tz = MApp(2.2).datetime.getTimeZone();
+    if(tz=='-8'){
+        $("#navigation dd a").each(function(){
+            if(this.href=='http://goo.gl/e0k9lT'||this.href.substring(24)=='applock.php'){
+                $(this).parent().remove();
+            }
+        });
+	}
+	
+	/*page_name = MApp(2.2).url.getFileName();
+	if(page_name=='advancedsystemcarefree.php'||page_name=='index.php'){
+		waring_lan = MApp(2.2).url.getDirPath().substring(1,3);
+		waring_lan_txt = [];
+		waring_lan_txt['en'] = "<strong>Microsoft Warns:</strong> 4 severe \"wormable\" security exploits can let attackers spread malware, similar to WannaCry. <a href=\"https://www.iobit.com/en/knowledge-install-windows-kb4512508-updates-to-protect-your-pc-from-4-severe-security-exploits-229.php?from=tb\" target='_blank'> Apply Windows August updates immediately>></a>";
+		waring_lan_txt['dk'] = "<strong>Microsoft advarer:</strong> 4 alvorlige \"uormelige\" sikkerhedsudnyttelser kan lade angribere sprede malware, svarende til WannaCry. <br><a href=\"https://www.iobit.com/dk/knowledge-installer-windows-kb4512508-opdateringer-til-beskyttelse-af-din-pc-mod-4-alvorlige-sikkerhedsudnyttelser-236.php\" target='_blank'>Anvend Windows August-opdateringer med det samme >></a>";
+		waring_lan_txt['de'] = "<strong>Microsoft warnt:</strong> Durch 4 schwerwiegende \"wormable\" Sicherheits-Exploits können Angreifer Malware verbreiten, ähnlich wie bei WannaCry.  <br><a href=\"https://www.iobit.com/de/knowledge-installieren-sie-windows-kb4512508-updates,-um-ihren-pc-vor-vier-schwerwiegenden-sicherheitsrisiken-zu-sch%C3%BCtzen-237.php\" target='_blank'>Wenden Sie die August-Updates von Windows 10 sofort an >></a>";
+		waring_lan_txt['nl'] = "<strong>Microsoft waarschuwt:</strong> 4 ernstige \"wormbare\" beveiligingskwetsbaarheden laten aanvallers WannaCry-achtige malware verspreiden.  <br><a href=\"https://www.iobit.com/nl/knowledge-installeer-windows-kb4512508-updates-om-uw-pc-te-beschermen-tegen-4-ernstige-beveiligingskwetsbaarheden-233.php\" target='_blank'>Pas Windows Augustus Updates onmiddellijk toe>></a>";
+		waring_lan_txt['fr'] = "<strong>Avertissement Microsoft:</strong> 4 failles majeures 'wormable' permettant aux attaquants de se propager des malwares similaires à WannaCry. <br><a href=\"https://www.iobit.com/fr/knowledge-installez-la-mise-%C3%A0-jour-kb4512508-de-windows-pour-prot%C3%A9ger-votre-ordinateur-contre-les-quatre-vuln%C3%A9rabilit%C3%A9s-de-s%C3%A9curit%C3%A9-critiques-234.php\" target='_blank'>Installez immédiatement la dernière mise à jour de sécurité de Windows>></a>";
+		waring_lan_txt['es'] = "<strong>Microsoft Alerta:</strong> 4 graves ataques de seguridad \"wormable\" pueden permitir a los atacantes propagar malware, similar a WannaCry. <br><a href=\"https://www.iobit.com/es/knowledge-instala-las-actualizaciones-de-agosto-de-windows-kb4512508-para-proteger-tu-pc-de-4-vulnerabilidades-de-seguridad-severas-238.php\" target='_blank'>Aplica las actualizaciones de agosto de Windows inmediatamente >></a>";
+		waring_lan_txt['pt'] = "<strong>Microsoft Alerta:</strong> Quatro falhas de segurança graves podem permitir que hackers espalhem malware semelhente ao WannaCry. <br><a href=\"https://www.iobit.com/pt/knowledge-instale-as-atualizações-do-windows-kb4512508-para-proteger-o-seu-pc-de-quatro-graves-vulnerabilidades-de-segurança-230.php\" target='_blank'>Aplique as atualizações de Agosto do Windows imediatamente>></a>";
+		waring_lan_txt['sv'] = "<strong>Microsoft Varning:</strong> 4 allvarliga \"wormable\" säkerhetsutnyttjande kan låta angripare sprida skadlig programvara, liknande WannaCry.  <br><a href=\"https://www.iobit.com/sv/knowledge-install-windows-kb4512508-updates-to-protect-your-pc-from-4-severe-security-exploits-239.php\" target='_blank'>Tillämpa omedelbart augustis Windows uppdatering >></a>";
+		waring_lan_txt['it'] = "<strong>Avviso Importante di Microsoft:</strong> 4 vulnerabilità di sicurezza critiche possono essere sfruttate dagli hacker a diffondere il malware e infettare il computer, simile al WannaCry.  <br><a href=\"https://www.iobit.com/it/knowledge-installa-l%E2%80%99ultimo-aggiornamento-di-windows-kb4512508-per-proteggere-il-tuo-pc-dalle-4-critiche-vulnerabilit%C3%A0-di-sicurezza-232.php\" target='_blank'>Applica immediatamente l’aggiornamento di Windows di Agosto >></a>";
+		waring_lan_txt['pl'] = "<strong>Ostrzeżenie Microsoft:</strong> 4 poważne exploity bezpieczeństwa mogą pozwolić atakującym rozprzestrzeniać złośliwe oprogramowanie, podobnie jak WannaCry.  <br><a href=\"https://www.iobit.com/pl/knowledge-zainstaluj-sierpniowe-aktualizacje-systemu-windows-10,-aby-chroni%C4%87-sw%C3%B3j-komputer-przed-4-powa%C5%BCnymi-zagro%C5%BCeniami-bezpiecze%C5%84stwa-235.php\" target='_blank'>Natychmiast zastosuj sierpniowe aktualizacje systemu Windows >></a>";
+		$("body").append("<div class='warning-notes'><div class='container'><p>"+waring_lan_txt[waring_lan]+"</p><span class='note-close' onclick=\"$('.warning-notes').remove()\"><i class=\"fa fa-times-circle\"></i></span></div></div>");
+		if(waring_lan!='en'){
+			$('.warning-notes').css("height","55px").css("line-height","25px");
+		}
+	}*/
+	
+//temporary
+//header navIcon
+	$(".navBtnWrap").click(function(event) {
+		if(!$(".header").hasClass("open")) {
+			$(".header").addClass("open");
+			$("html,body").css({                                
+	        "position":"fixed",                                
+	        "top":-scroll                            
+	    });
+	    var height = window.screen.height - 200;
+
+	    $(".header-nav").css({height:'calc(100% - 60px)'});
+	    //setTimeout('alert($(".header-nav").height())', 1000);
+		}
+		else {
+			$(".header-nav").css({height:'0'});
+			$(".header").removeClass("open");
+			$(".header-nav li.hasSub .gnavi-list-wrap").removeClass('active');
+			$(".main-nav").removeClass('active');
+			$("html,body").css({                                    
+	        "position":"static",                            
+	     });
+	          
+		}
+	});
+});
+
+$(document).mouseup(function(e) {
+	//hide search bar click anywhere except itself ;
+	var SearchBar = $(".header-new .search-bar");
+	if(SearchBar.has(e.target).length === 0) {
+		SearchBar.removeClass("active").removeClass('on-error');
+	}
+	// select bar
+	var selectBar = $(".select-content");
+	if(selectBar.has(e.target).length === 0) {
+		selectBar.parent().removeClass("active");
+		$(".select-content .simulation-select").removeClass("active").next().removeClass("active");
+	}
+	var supportBar = $(".message-module .support");
+	if(supportBar.has(e.target).length === 0) {
+		supportBar.removeClass("active");
+		supportBar.find(".content").slideUp("slow");
+	}
+	//hide nav 
+	var navSafeZone = $(".main-nav");
+	var menubarSafeZone = $(".header-nav")
+	if(navSafeZone.has(e.target).length === 0 && menubarSafeZone.has(e.target).length === 0) {
+		$(".header-nav li.hasSub .gnavi-list-wrap").removeClass("active");
+		$(".main-nav").removeClass("active");
+		// reset selected to first one
+		$(".main-nav .category li:first-child").addClass('active').siblings().removeClass('active');
+		$(".main-nav .nav-sub .sub-category:first-child").addClass('active').siblings().removeClass('active');
+		//$(".header-nav li:last-child").css("display":"block")
+	}
+
+	//hide subscribe error
+	$("#subscribeNewsletterEmails").mousedown(function(){
+		$(".subscribe .email-bar").removeClass('on-error');
+	});
+});
+
+$(window).on('scroll', function (){
+	if ($('body').find('.backtop').length == '0') {
+		return;
+	}
+	var scrollHeight = ($(window).height() / 2);
+	var offsetTop = $(".backtop").offset().top;	
+	var absHeight = $(window).height();
+	
+	if ($(window).scrollTop() > scrollHeight) {
+		// $('.backtop').addClass('active')
+		$('.backtop').fadeIn();
+	}else if (absHeight > offsetTop) {
+		$('.backtop').fadeOut(function() {
+			$(this).removeAttr('style');
+		});
+	};           
+});
+
+
+function backTop() {
+	$("html, body").animate({scrollTop: '0'}, 'slow');
+	$(".backtop").removeClass('active');
+}
+
+function onSend(){
+	$(".add-zone .email-bar").fadeOut('400', function() {
+		$(".feedback").addClass('active');
+	});
+	$(".add-zone").append('<div class="feedback progressing"><i class="icon-send"></i></div>');
+}
+function onFailure(){
+	$(" .email-bar").show();
+	$(".feedback").removeClass('active');
+}
+function onSuccess(){
+    $(".feedback .icon-send").remove();
+    $(".feedback").append('<i class="fa fa-check"></i>');
+    $(".feedback").addClass('success').removeClass('active');
+		$(".discription").html("You're almost done. Please check your inbox or spam folder for a confirmation email to complete your subscription.")
+}
+function onMobileSuccess(){
+    $(".subscribe-message").addClass("hide")
+		$(".subscribe-message-before").removeClass("hide")
+}
+
+function searchSubmitSend(){
+	if ($('#q').val()==''){
+		$(".search-bar").addClass('on-error');
+		return false;
+	}
+	return true;
+}
+
+function removeGdpr(){
+	$('.float-bar').remove();
+	MApp(2.2).cookie.set('showgdpr',1);
+	if($("#ascpop").hasClass("live0"))	$('#ascpop').removeClass('live0').addClass('live');
+	if($("#ascthank").hasClass("live0"))	$('#ascthank').removeClass('live0').addClass('live');
+	if($("#isu").hasClass("live0"))	$('#isu').removeClass('live0').addClass('live');
+	if($(".coupon").hasClass("live0"))	$('.coupon').removeClass('live0').addClass('live');
+	if($("#popMidYear").hasClass("live0"))	$('#popMidYear').removeClass('live0').addClass('live');
+	if($("#popproduct0701").hasClass("live0"))	$('#popproduct0701').removeClass('live0').addClass('live');
+	if($("#iu9").hasClass("live0"))	$('#iu9').removeClass('live0').addClass('live');
+	showclass = 'live';
+}
+
+
+
+function refreshCaptcha(id) {
+		var randoms = Math.random();
+		$('#'+id).attr('src', 'seccode.php?nocache='+randoms);
+}
+
+function appendLanguageSwitchParam(url, param, hash) {
+	if (!url) {
+		return '';
+	}
+	var separator = url.indexOf('?') === -1 ? '?' : '&';
+	return url + separator + param + (hash || '');
+}
+
+function changeCountry(id,lan){
+    if(MApp(2.2).cookie.set('showtranslate',0)){
+        var filePath = MApp(2.2).url.getFilePath();
+        var fileArr = filePath.split('/');
+        fileArr.shift();
+        fileArr.shift();
+        var fileUrl = fileArr.join('/');
+        var splitPageMap = window.IObitSplitPageMap || {};
+        var getLanguageSwitchUrl = typeof window.getIObitLanguageSwitchUrl === 'function' ? window.getIObitLanguageSwitchUrl : null;
+        var switchUrl = getLanguageSwitchUrl ? getLanguageSwitchUrl(lan, '') : '';
+        var switchUrlEn = getLanguageSwitchUrl ? getLanguageSwitchUrl('en', '') : '';
+        if(splitPageMap[fileUrl]){
+            fileUrl = splitPageMap[fileUrl];
+        }
+        if(lan=='my'||lan=='th'||lan=='hi'||lan=='ms'||lan=='id'||lan=='ko'){
+            MApp(2.2).cookie.set('showtranslate',1);
+            var url = switchUrlEn ? appendLanguageSwitchParam(switchUrlEn, 'r', '#googtrans('+lan+')') : 'https://'+document.domain +  '/en/' + fileUrl +'?r#googtrans('+lan+')';
+            location.href = url;
+        }else if(lan=='jp'){
+            var url = switchUrl || 'https://jp.iobit.com/?utm_source=www.iobit.com';
+            location.href = url;
+        }else if(lan=='ru'){
+			if(switchUrl){
+				location.href = switchUrl;
+			}else{
+				if(fileUrl=='index.php'){
+					var url = 'https://ru.iobit.com/';
+				}else{
+					var url = 'https://ru.iobit.com/' + fileUrl;
+				}
+	            location.href = url;
+			}
+        }else{
+            MApp(2.2).cookie.remove('country');
+            if(MApp(2.2).cookie.set('country',id)){
+				MApp(2.2).cookie.set('changecountry',1);
+                if(switchUrl){
+                    location.href = switchUrl;
+                }else{
+                    var url = 'https://'+document.domain +  '/' + lan + '/' + fileUrl+'?b1';
+                    location.href = url;
+                }
+            }
+        }
+    }
+	
+}
+
+var ismobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+
+/**
+ * Display diagnosis call
+ **/
+var DiagnosisCall = (new function(){
+	this.language = MApp(2.2).language.langArr[0];
+	this.domain = MApp(2.2).url.getDomain();
+	this.dirPath = MApp(2.2).url.getDirPath();
+	this.filePath = MApp(2.2).url.getFilePath();
+	this.fileName = MApp(2.2).url.getFileName();
+	this.fileExt = MApp(2.2).packages.getFileExt(this.fileName);
+	this.multi_lang_curr = 'en';
+	this.multi_lang_show = true;
+	this.multi_lang_txt = [];
+	this.multi_lang_txt['en'] = ["Get tech support 24x7", "Call now for a FREE diagnosis", "", "We can help with any device","Note: Paid service will be offered when needed"];
+	// this.multi_lang_txt['nl'] = ["Indien u hulp nodig heeft bij het identificeren van het probleem op uw pc of bij het kiezen van de juiste software", "Bel voor een lokaal diagnose (lokaal tarief)", "Nummer", "+31 (0)85 3015530 "];
+	// this.multi_lang_txt['it'] = ["Se hai bisogno di aiuto per identificare e risolvere i problemi del tuo PC o per eleggere un software adeguato","Chiama per un dialogo locale (tariffa urbana)","Numero","+39 (0)69 7630258"];
+	// this.multi_lang_txt['fr'] = ["Si vous suspectez une anomalie sur votre ordinateur ou avez besoin d'une aide avec un logiciel", "Appelez-nous pour un Diagnostic", "Numéro Vert", "09-77-55-1865"];
+
+	this.run = function(){
+		// Append diagnosis box to body
+		if (this.dirPath.substring(0,16) == '/2015.iobit.com/') this.dirPath = this.dirPath.substring(15);
+		if (this.dirPath.substring(0,4) == '/fr/') this.multi_lang_curr = 'fr';
+		else if (this.dirPath.substring(0,4) == '/de/') this.multi_lang_curr = 'de';
+		else if (this.dirPath.substring(0,4) == '/it/') this.multi_lang_curr = 'it';
+		else if (this.dirPath.substring(0,3) == '/es') this.multi_lang_curr = 'es';
+		else if (this.dirPath.substring(0,4) == '/nl/') this.multi_lang_curr = 'nl';
+		else if (this.dirPath.substring(0,4) == '/pt/') this.multi_lang_curr = 'pt';
+		else if (this.dirPath.substring(0,4) == '/sv/') this.multi_lang_curr = 'sv';
+		else if (this.dirPath.substring(0,4) == '/dk/') this.multi_lang_curr = 'dk';
+		else if (this.dirPath.substring(0,4) == '/pl/') this.multi_lang_curr = 'pl';
+		if (typeof this.multi_lang_txt[this.multi_lang_curr] == 'undefined') {
+			this.multi_lang_curr = 'en';
+			this.multi_lang_show = false;
+		}
+		
+		// Debug
+		if (this.domain == '127.0.0.1' || this.domain == '192.168.1.238'){
+				this.domain = 'www.iobit.com';
+				this.dirPath = this.dirPath.replace(/(.+iobit.com)/, '');
+				this.filePath = this.filePath.replace(/(.+iobit.com)/, '');
+		}
+		// Show or hidden diagnosis box
+		if (document.body.clientWidth < 1200) return false;
+		if (this.dirPath.substring(0,9) == '/compare/') return false;
+		if (this.dirPath.substring(0,9) == '/install/') return false;
+		if (this.dirPath.substring(0,8) == '/update/') return false;
+
+		//if (this.filePath.substring(0,4) == '/en/') return false;
+		
+		if (this.filePath == '/en/onlinefeedback.php') return false;
+		if (this.filePath == '/en/faq.php') return false;
+		if (this.filePath == '/en/allfaq.php') return false;
+		if (this.filePath == '/en/refund.php')  return false;
+		if (this.filePath == '/en/reinstallproduct.php')  return false;
+		if (this.filePath == '/en/transferproduct.php') return false;
+		if (this.filePath == '/en/lostcode.php')  return false;
+		if (this.filePath == '/en/renew.php')  return false;
+		if (this.fileName.substring(0,12) == 'hotquestions')  return false;
+		if (this.fileName.substring(0,23) == 'onlinefeedback-form.php')  return false;
+		
+		if (this.filePath.substring(4) == 'thankyou.php') return false;
+		if (this.filePath == '/en/product-manuals.php') return false;
+		if (this.filePath == '/incompatible-notice/asc/steps-to-use-asc.php') return false;
+		if (this.filePath == '/en/advanced-mobile-care.php') return false;
+		if (this.fileName == 'aggiorna-driver.php')  return false;
+		if (this.multi_lang_show == false) return false;
+		this.addLayer();
+	};
+	this.addLayer = function(){
+		if ($('#diagnosis-call').html() != null) return false;	
+		var content = ' <div id="diagnosis-call">';
+		content += '  <div class="call-content">';
+		content += '  <div class="active-icon"></div>';
+		content += '  <div class="call-bubble hide">';
+		content += '      <h2>'+this.multi_lang_txt[this.multi_lang_curr][0]+' <i></i></h2>';
+		content += '      <dl class="tel">';
+		content += '          <dt>'+this.multi_lang_txt[this.multi_lang_curr][1]+'</dt>';
+		content += '          <dd><i></i>'+this.multi_lang_txt[this.multi_lang_curr][2]+'</dd>';
+		content += '      </dl>';
+		content += '      <dl class="device">';
+		content += '          <dt>'+this.multi_lang_txt[this.multi_lang_curr][3]+'</dt>';
+		content += '          <dd><img src="https://www.iobit.com/tpl/images/scrollup-telsupport-device.png" alt="" /></dd>';
+		content += '      </dl>';
+		content += '     <p>'+this.multi_lang_txt[this.multi_lang_curr][4]+' </p>';
+		content += '  </div></div></div>';
+		$('body').append(content);						    
+	} 
+});
