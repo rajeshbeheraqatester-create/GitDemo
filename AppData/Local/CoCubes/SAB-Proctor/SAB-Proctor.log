@@ -1,0 +1,7 @@
+19-12-2024 14:31:22: Application Started
+SABTool: SendRequest, ErrorMessage:The remote server returned an error: (404) Not Found., url:https://static.cocubes.com/partners/cocubes/phd2024, ErrorStackTrace:   at System.Net.HttpWebRequest.GetResponse()
+   at CoCubes.Windows.Tools.SABHelperFunctions.WebRequestHelperClass.SendRequest(String url, String paramsStr, Boolean isGetRequest)
+19-12-2024 14:42:59 : Key was hooked-unhooked
+19-12-2024 14:45:01 : Key pressed programmatically
+19-12-2024 14:45:02 : Key was hooked-unhooked
+19-12-2024 14:45:27: Application Closed
