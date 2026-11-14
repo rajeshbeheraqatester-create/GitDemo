@@ -1,0 +1,8 @@
+2026-11-14T12:47:11.613Z [INFO] Native runtime logging initialized
+2026-11-14T12:47:11.678Z [WARNING] [rust:standalone_host::standalone::transport] Unable to locate runtime-bundled skills beside the native runtime
+2026-11-14T12:47:28.037Z [WARNING] [rust:model_engine::model::http] Model HTTP request failed {"stage":"model_http","http_status":403,"request_id":"80CA:AE177:2D3AE57:31F731D:6AF85860"}
+2026-11-14T12:47:29.040Z [WARNING] [rust:model_engine::model::http] Model HTTP request failed {"stage":"model_http","http_status":403,"request_id":"80CA:AE177:2D3B33F:31F7898:6AF85860"}
+2026-11-14T12:47:30.993Z [WARNING] [rust:model_engine::model::http] Model HTTP request failed {"stage":"model_http","http_status":403,"request_id":"80CA:AE177:2D3BD37:31F8394:6AF85861"}
+2026-11-14T12:47:34.723Z [WARNING] [rust:model_engine::model::http] Model HTTP request failed {"stage":"model_http","http_status":403,"request_id":"80CA:AE177:2D3D07A:31F98F1:6AF85863"}
+2026-11-14T12:47:41.312Z [WARNING] [rust:model_engine::model::http] Model HTTP request failed {"stage":"model_http","http_status":403,"request_id":"2B4D:2A7FA8:2437B5F:2891AD9:6AF8586D"}
+2026-11-14T13:00:45.457Z [WARNING] [rust:standalone_host::standalone] Standalone JSON-RPC one-way host call failed {"error":"Standalone server does not support host call 'lifecycle_server_shutdown_finalize'"}
